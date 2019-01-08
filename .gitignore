@@ -1,7 +1,12 @@
+# modules
 node_modules
+
+# environment configs
 .env
 
 # apps
 socket-getway
 api-getway
+
+# datas
 data

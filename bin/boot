@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# clone socket getway app
+git@github.com:shovity/socket-getway.git
+
+# clone api getway app
+git@github.com:shovity/api-getway.git

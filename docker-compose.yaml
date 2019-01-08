@@ -18,6 +18,23 @@ services:
     volumes:
       - ./data/socket_getway_redis:/data
 
+  api_getway:
+    container_name: api_getway
+    build: ./api-getway
+    image: api-getway
+    ports:
+      - "3100:3100"
+    depends_on:
+      - api_getway_redis
+      - rabbitmq
+    command: yarn start
+
+  api_getway_redis:
+    container_name: api_getway_redis
+    image: redis:alpine
+    volumes:
+      - ./data/api_getway_redis:/data
+
   rabbitmq:
     container_name: rabbitmq
     image: rabbitmq:management-alpine

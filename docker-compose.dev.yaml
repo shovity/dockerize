@@ -1,11 +1,16 @@
-# overrid config for develop
-
 version: "3"
 
 services:
   socket_getway:
     volumes:
       - ./socket-getway:/code
+    environment:
+      - NODE_ENV=development
+    command: yarn watch
+
+  api_getway:
+    volumes:
+      - ./api-getway:/code
     environment:
       - NODE_ENV=development
     command: yarn watch

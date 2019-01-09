@@ -1,16 +1,16 @@
 version: "3"
 
 services:
-  socket_getway:
+  socket_gateway:
     volumes:
-      - ./socket-getway:/code
+      - ./socket-gateway:/code
     environment:
       - NODE_ENV=development
     command: yarn watch
 
-  api_getway:
+  api_gateway:
     volumes:
-      - ./api-getway:/code
+      - ./api-gateway:/code
     environment:
       - NODE_ENV=development
     command: yarn watch

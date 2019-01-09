@@ -5,8 +5,8 @@ node_modules
 .env
 
 # apps
-socket-getway
-api-getway
+socket-gateway
+api-gateway
 
 # datas
 data

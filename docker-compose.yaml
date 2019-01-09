@@ -1,39 +1,40 @@
 version: "3"
 
 services:
-  socket_getway:
-    container_name: socket_getway
-    build: ./socket-getway
-    image: socket-getway
+  socket_gateway:
+    container_name: socket_gateway
+    build: ./socket-gateway
+    image: socket-gateway
     ports:
-      - "3000:3000"
+      - "3000:80"
     depends_on:
-      - socket_getway_redis
+      - socket_gateway_redis
+      - rabbitmq
+      - api_gateway
+    command: yarn start
+
+  socket_gateway_redis:
+    container_name: socket_gateway_redis
+    image: redis:alpine
+    volumes:
+      - ./data/socket_gateway_redis:/data
+
+  api_gateway:
+    container_name: api_gateway
+    build: ./api-gateway
+    image: api-gateway
+    ports:
+      - "3100:80"
+    depends_on:
+      - api_gateway_redis
       - rabbitmq
     command: yarn start
 
-  socket_getway_redis:
-    container_name: socket_getway_redis
+  api_gateway_redis:
+    container_name: api_gateway_redis
     image: redis:alpine
     volumes:
-      - ./data/socket_getway_redis:/data
-
-  api_getway:
-    container_name: api_getway
-    build: ./api-getway
-    image: api-getway
-    ports:
-      - "3100:3100"
-    depends_on:
-      - api_getway_redis
-      - rabbitmq
-    command: yarn start
-
-  api_getway_redis:
-    container_name: api_getway_redis
-    image: redis:alpine
-    volumes:
-      - ./data/api_getway_redis:/data
+      - ./data/api_gateway_redis:/data
 
   rabbitmq:
     container_name: rabbitmq
